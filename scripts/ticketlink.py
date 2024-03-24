@@ -54,7 +54,7 @@ def run():
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
 
-    driver = webdriver.Chrome('https://www.ticketlink.co.kr/help/notice', chrome_options=chrome_options)
+    driver = webdriver.Chrome('https://www.ticketlink.co.kr/help/notice', options=chrome_options)
 
     query_txt = '뮤지컬'
     element = driver.find_element(By.NAME, 'title')
@@ -113,8 +113,8 @@ def run():
             continue
 
         Musicals(title=title[0], ticket_time=open_date, location=location[0], source="ticketlink").save()
-        update_excel(start_row, musical_value, df)
-
-    # 시간 지연 이후에 엑셀에 저장
-    time.sleep(10)  #
-    df.to_csv(new_filename+'.csv', index=False)
+    #     update_excel(start_row, musical_value, df)
+    #
+    # # 시간 지연 이후에 엑셀에 저장
+    # time.sleep(10)  #
+    # df.to_csv(new_filename+'.csv', index=False)
