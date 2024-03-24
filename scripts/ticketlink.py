@@ -4,6 +4,7 @@ from datetime import datetime
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import pandas as pd
 import re
@@ -51,11 +52,12 @@ def run():
     # new_filename = datetime.today().strftime("%Y-%m-%d")
 
     chrome_options = webdriver.ChromeOptions()
+    service = Service(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")  # 창을 띄우지 않음
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")  # 샌드박스 보안 비활성화
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+    driver = webdriver.Chrome(service=service, options=chrome_options)
 
     driver.get('https://www.ticketlink.co.kr/help/notice')
 
