@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: gunicorn tit-ta-project.wsgi --log-file-
