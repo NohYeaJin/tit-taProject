@@ -54,7 +54,8 @@ def run():
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
 
-    driver = webdriver.Chrome('https://www.ticketlink.co.kr/help/notice', options=chrome_options)
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.get('https://www.ticketlink.co.kr/help/notice')
 
     query_txt = '뮤지컬'
     element = driver.find_element(By.NAME, 'title')
