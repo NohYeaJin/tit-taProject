@@ -1,4 +1,3 @@
-
 from django.db import models
 from django.utils import timezone
 
@@ -12,9 +11,9 @@ class Musicals(models.Model):
     open_from = models.DateTimeField(default=timezone.now)
     open_to = models.DateTimeField(default=timezone.now)
     ticket_time = models.DateTimeField()
-    location = models.CharField(max_length=100)
+    location = models.ForeignKey('Locations', on_delete=models.CASCADE)  # 외래키 추가
     theater = models.CharField(max_length=100, blank=True)
-    category = models.CharField(max_length=100, blank=True)
+    category = models.ForeignKey('Categories', on_delete=models.CASCADE)  # 외래키 추가
     poster = models.CharField(max_length=100, blank=True)
     source = models.CharField(max_length=100)
     source_id = models.IntegerField(default=1)
@@ -26,3 +25,16 @@ class Musicals(models.Model):
 
     def __str__(self):
         return self.title
+
+class Categories(models.Model):
+    category_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.category_name
+
+
+class Locations(models.Model):
+    location_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.location_name

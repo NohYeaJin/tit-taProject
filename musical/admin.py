@@ -1,5 +1,10 @@
 from django.contrib import admin
+from .models import Musicals, Categories, Locations
 
-from .models import Musicals
+class CrawledMusicalAdmin(admin.ModelAdmin):
+    search_fields = ['title', 'ticket_attribute', 'prf_attribute', 'search_keyword']
+    list_filter = ['category', 'theater', 'cast', 'price', 'open_from', 'open_to']
 
-admin.site.register(Musicals)
+admin.site.register(Musicals, CrawledMusicalAdmin)
+admin.site.register(Categories)
+admin.site.register(Locations)
