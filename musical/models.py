@@ -33,6 +33,7 @@ class Categories(models.Model):
         return self.category_name
 
 
+
 class Locations(models.Model):
     location_name = models.CharField(max_length=50)
 
