@@ -2,6 +2,7 @@ import time
 from datetime import datetime
 
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import pandas as pd
 import re
@@ -48,8 +49,12 @@ def run():
 
     new_filename = datetime.today().strftime("%Y-%m-%d")
 
-    driver = webdriver.Chrome()
-    driver.get('https://www.ticketlink.co.kr/help/notice')
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+
+    driver = webdriver.Chrome('https://www.ticketlink.co.kr/help/notice', chrome_options=chrome_options)
 
     query_txt = '뮤지컬'
     element = driver.find_element(By.NAME, 'title')
@@ -98,7 +103,7 @@ def run():
             musical_value[8] = "no location!"
             musical_value[1] = raw_title.text
             update_excel(start_row, musical_value, df)
-            Musicals(title=title[0], ticket_time=open_date, location=location[0], source="ticketlink", fail=True,
+            Musicals(title=title[0], ticket_time=open_date, location='', source="ticketlink", fail=True,
                      fail_reason=musical_value[8]).save()
             continue
         musical_value[4] = location[0]
