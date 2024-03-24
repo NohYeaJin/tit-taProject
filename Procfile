@@ -1,1 +1,3 @@
-web: gunicorn tit-ta-project.wsgi --log-file-
+web: gunicorn ticket_notification.wsgi:application --log-file - --log-level debug
+python manage.py collectstatic --noinput
+manage.py migrate
