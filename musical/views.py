@@ -5,4 +5,4 @@ from musical.models import Musicals
 class MusicalListView(View):
     def get(self, request, *args, **kwargs):
         musicals = list(Musicals.objects.values())
-        return JsonResponse(musicals, safe=False, content_type=u"application/json; charset=utf-8")
+        return JsonResponse({'data': musicals}, json_dumps_params={'ensure_ascii':False}, status=200)
