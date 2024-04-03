@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.safestring import mark_safe
 
 
 class Musicals(models.Model):
@@ -25,6 +26,9 @@ class Musicals(models.Model):
 
     def __str__(self):
         return self.title
+
+    def img_preview(self):
+        return mark_safe('<img src = "{url}" width = "300"/>'.format(url=self.poster))
 
 class Categories(models.Model):
     category_name = models.CharField(max_length=50)
