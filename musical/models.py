@@ -5,6 +5,7 @@ from django.utils.safestring import mark_safe
 
 class Musicals(models.Model):
     is_live = models.BooleanField(default=False)
+    category = models.ForeignKey('Categories', on_delete=models.CASCADE)  # 외래키 추가
     title = models.CharField(max_length=100)
     ticket_attribute = models.CharField(max_length=100, blank=True)
     prf_attribute = models.CharField(max_length=100, blank=True)
@@ -14,7 +15,7 @@ class Musicals(models.Model):
     ticket_time = models.DateTimeField()
     location = models.ForeignKey('Locations', on_delete=models.CASCADE)  # 외래키 추가
     theater = models.CharField(max_length=100, blank=True)
-    category = models.ForeignKey('Categories', on_delete=models.CASCADE)  # 외래키 추가
+    genre = models.ForeignKey('Genres', on_delete=models.CASCADE)  # 외래키 추가
     poster = models.CharField(max_length=100, blank=True)
     source = models.CharField(max_length=100)
     source_id = models.IntegerField(default=1)
@@ -43,3 +44,18 @@ class Locations(models.Model):
 
     def __str__(self):
         return self.location_name
+
+class Genres(models.Model):
+    genre_name = models.CharField(max_length=50, default='')
+    def __str__(self):
+        return self.genre_name
+
+class MainImages(models.Model):
+    image_url = models.CharField(max_length=100)
+    sequence = models.IntegerField(unique=True, choices=[(i, i) for i in range(1, 6)])
+
+    def __str__(self):
+        return str(self.sequence) + " " + self.image_url
+
+    def img_preview(self):
+        return mark_safe('<img src = "{url}" width = "300"/>'.format(url=self.image_url))

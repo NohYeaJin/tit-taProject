@@ -17,10 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from musical.views import MusicalListView
+from musical.views import MusicalListView, PopularMusicalListView, UpcomingMusicalListView, CategoryListView, \
+    GenreListView, MainImageListView, MusicalDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('musicals/', MusicalListView.as_view(), name="musical-list")
+    path('musicals/popular/', PopularMusicalListView.as_view(), name="popular-musical-list"),
+    path('musicals/upcoming/', UpcomingMusicalListView.as_view(), name="upcoming-musical-list"),
+    path('categories/', CategoryListView.as_view(), name="category-list"),
+    path('genres/', GenreListView.as_view(), name="genre-list"),
+    path('main/images/', MainImageListView.as_view(), name="main-image-list"),
+    path('musicals/<int:musical_id>/', MusicalDetailView.as_view(), name='musical_detail'),
+
 
 ]
