@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Musicals, Categories, Locations, Genres, MainImages
+from .models import Musicals, Categories, Locations, Genres, MainImages, QuillPost
+
 
 class CrawledMusicalAdmin(admin.ModelAdmin):
     search_fields = ['title', 'ticket_attribute', 'prf_attribute', 'search_keyword']
@@ -14,3 +15,6 @@ admin.site.register(Categories)
 admin.site.register(Locations)
 admin.site.register(Genres)
 admin.site.register(MainImages, MainImageAdmin)
+@admin.register(QuillPost)
+class QuillPostAdmin(admin.ModelAdmin):
+    pass

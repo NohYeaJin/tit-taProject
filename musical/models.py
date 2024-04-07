@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.safestring import mark_safe
-
+from django_quill.fields import QuillField
 
 class Musicals(models.Model):
     is_live = models.BooleanField(default=False)
@@ -59,3 +59,6 @@ class MainImages(models.Model):
 
     def img_preview(self):
         return mark_safe('<img src = "{url}" width = "300"/>'.format(url=self.image_url))
+
+class QuillPost(models.Model):
+    content = QuillField()
