@@ -60,5 +60,8 @@ class MainImages(models.Model):
     def img_preview(self):
         return mark_safe('<img src = "{url}" width = "300"/>'.format(url=self.image_url))
 
-class QuillPost(models.Model):
-    content = QuillField()
+class Notice(models.Model):
+    notice_title = models.CharField(max_length=100)
+    notice_content = QuillField()
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(default=timezone.now)

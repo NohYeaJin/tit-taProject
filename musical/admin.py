@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Musicals, Categories, Locations, Genres, MainImages, QuillPost
+from .models import Musicals, Categories, Locations, Genres, MainImages, Notice
 
 
 class CrawledMusicalAdmin(admin.ModelAdmin):
@@ -15,6 +15,6 @@ admin.site.register(Categories)
 admin.site.register(Locations)
 admin.site.register(Genres)
 admin.site.register(MainImages, MainImageAdmin)
-@admin.register(QuillPost)
+@admin.register(Notice)
 class QuillPostAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ['created_at', 'updated_at']
