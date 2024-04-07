@@ -65,3 +65,6 @@ class Notice(models.Model):
     notice_content = QuillField()
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.notice_title
