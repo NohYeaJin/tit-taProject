@@ -32,10 +32,10 @@ class Musicals(models.Model):
         return mark_safe('<img src = "{url}" width = "300"/>'.format(url=self.poster))
 
 class Categories(models.Model):
-    category_name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.category_name
+        return self.name
 
 
 
@@ -64,7 +64,7 @@ class Notice(models.Model):
     notice_title = models.CharField(max_length=100)
     notice_content = QuillField()
     created_at = models.DateTimeField(default=timezone.now)
-    updated_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.notice_title
