@@ -27,7 +27,7 @@
         <ul>
             {% for reservation in item.reservations %}
                 <li>
-                    Reservation Link: <a href="{{ reservation.link }}">{{ reservation.name }}</a>
+                    Reservation Link: <a href="{{ reservation.link }}">{{ reservation.source_name }}</a>
                 </li>
             {% endfor %}
         </ul>

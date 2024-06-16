@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.generic import View
 from musical.models import Musicals, Categories, Genres, MainImages, MusicalSeries, MusicalReservationLink, Users, \
-    Notice, TicketNotification
+    Notice, TicketNotification, MusicalSource
 from .forms import SignupForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout as auth_logout
@@ -124,16 +124,23 @@ class DemoMusicalDetailView(View):
         musical = Musicals.objects.get(id=musical_id)
         musical_series = MusicalSeries.objects.filter(musical_id=musical_id).values()
 
+        source_list = MusicalSource.objects.all().values()
+        source_dict = {source['id']: source['source_name'] for source in source_list}
+
         series_with_reservations = []
         for series in musical_series:
             series_id = series['id']
-            print(series_id)
             reservations = MusicalReservationLink.objects.filter(series_id=series_id).values()
-            print(list(reservations))
+            reservations_with_source = []
+            for reservation in reservations:
+                reservation_with_source = reservation.copy()
+                reservation_with_source['source_name'] = source_dict.get(reservation['source_id_id'], 'Unknown')
+                reservations_with_source.append(reservation_with_source)
             series_with_reservations.append({
                 'series': series,
-                'reservations': list(reservations)
+                'reservations': reservations_with_source
             })
+
         if 'user_id' not in request.session:
             notification_exists = False
         else:
