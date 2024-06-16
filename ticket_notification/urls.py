@@ -19,7 +19,7 @@ from django.urls import path
 
 from musical.views import MusicalListView, PopularMusicalListView, UpcomingMusicalListView, CategoryListView, \
     GenreListView, MainImageListView, MusicalDetailView, signup, user_login, DemoMainPageView, DemoMusicalDetailView, \
-    CategoryMusicalListView
+    CategoryMusicalListView, DemoMyPageView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,6 +34,7 @@ urlpatterns = [
     path('signup/', signup, name='signup'),
     path('login/', user_login, name='login'),
     path('', DemoMainPageView.as_view(), name='main-page'),
+    path('mypage/,', DemoMyPageView.as_view(), name='mypage'),
     path('musicals/detail/<int:musical_id>/', DemoMusicalDetailView.as_view(), name='musical_detail_demo'),
 
 

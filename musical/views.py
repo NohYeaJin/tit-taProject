@@ -1,5 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.views.generic import View
 from musical.models import Musicals, Categories, Genres, MainImages, MusicalSeries, MusicalReservationLink
 from .forms import SignupForm
@@ -111,3 +113,9 @@ class DemoMusicalDetailView(View):
             'series_with_reservations': series_with_reservations
         }
         return render(request, 'musical/musical_detail.html', context)
+
+
+@method_decorator(login_required, name='dispatch')
+class DemoMyPageView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'musical/mypage.html')

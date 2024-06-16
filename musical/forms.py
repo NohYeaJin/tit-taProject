@@ -7,7 +7,7 @@ class SignupForm(forms.ModelForm):
         model = Users
         fields = ['user_id', 'user_email', 'user_password', 'user_phone', 'user_address', 'user_nickname']
         widgets = {
-            'user_password': forms.PasswordInput(),  # 비밀번호 입력 시에는 비밀번호 형태로 보이도록 설정
+            'user_password': forms.PasswordInput(),
         }
 
 class LoginForm(AuthenticationForm):
