@@ -92,7 +92,8 @@ class DemoMainPageView(View):
 
 class DemoMusicalDetailView(View):
 
-    def get(self, request, musical_id, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
+        musical_id = kwargs.get('musical_id')
         musical = Musicals.objects.get(id=musical_id)
         musical_series = MusicalSeries.objects.filter(musical_id=musical_id).values()
 
@@ -109,4 +110,4 @@ class DemoMusicalDetailView(View):
             'musical': musical,
             'series_with_reservations': series_with_reservations
         }
-        return render(request, 'musical_detail.html', context)
+        return render(request, 'musical/musical_detail.html', context)

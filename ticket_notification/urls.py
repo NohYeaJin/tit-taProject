@@ -34,6 +34,7 @@ urlpatterns = [
     path('signup/', signup, name='signup'),
     path('login/', user_login, name='login'),
     path('', DemoMainPageView.as_view(), name='main-page'),
+    path('musicals/detail/<int:musical_id>/', DemoMusicalDetailView.as_view(), name='musical_detail_demo'),
 
 
 ]
