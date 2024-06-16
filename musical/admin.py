@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Musicals, Categories, Locations, Genres, MainImages, Notice, PushNotification, MusicalSeries, \
-    MusicalSource, TicketNotification, Users
+    MusicalSource, TicketNotification, Users, MusicalReservationLink
 
 
 class CrawledMusicalAdmin(admin.ModelAdmin):
@@ -36,4 +36,5 @@ admin.site.register(MusicalSeries)
 admin.site.register(MusicalSource)
 admin.site.register(TicketNotification, TicketNotificationAdmin)
 admin.site.register(Users, UserAdmin)
+admin.site.register(MusicalReservationLink)
 
