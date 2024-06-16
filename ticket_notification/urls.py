@@ -38,7 +38,7 @@ urlpatterns = [
     path('mypage/', DemoMyPageView.as_view(), name='mypage'),
     path('musicals/detail/<int:musical_id>/', DemoMusicalDetailView.as_view(), name='musical_detail_demo'),
     path('notices/', NoticeListView.as_view(), name='notice-list'),
-    path('notices/<int:musical_id>/', NoticeDetailView.as_view(), name='notice_detail'),
+    path('notices/<int:notice_id>/', NoticeDetailView.as_view(), name='notice_detail'),
 
 
 

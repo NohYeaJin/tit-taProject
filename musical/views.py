@@ -65,7 +65,7 @@ class CategoryMusicalListView(View):
 
 class NoticeListView(View):
     def get(self, request, *args, **kwargs):
-        notices = list(Notice.objects.values('notice_title', 'created_at').order_by('-created_at')[:5])
+        notices = list(Notice.objects.values().order_by('-created_at')[:5])
         return JsonResponse({'data': notices}, json_dumps_params={'ensure_ascii': False}, status=200)
 
 class NoticeDetailView(View):

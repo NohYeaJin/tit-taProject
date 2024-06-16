@@ -41,7 +41,7 @@
         // Transform function to create HTML list for notices
         function createNoticeLIst(data) {
             return data.data.map(notice =>
-                `<li><a href="/notices/${notice.id}/">${notice.title}</a></li>`
+                `<li><a href="/notices/${notice.id}/">${notice.notice_title}</a></li>`
             ).join('');
         }
 
