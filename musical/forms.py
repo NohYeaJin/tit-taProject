@@ -1,7 +1,6 @@
 # forms.py
 from django import forms
 from .models import Users
-from django.contrib.auth.forms import AuthenticationForm
 class SignupForm(forms.ModelForm):
     class Meta:
         model = Users
@@ -10,5 +9,6 @@ class SignupForm(forms.ModelForm):
             'user_password': forms.PasswordInput(),
         }
 
-class LoginForm(AuthenticationForm):
-    pass
+class LoginForm(forms.Form):
+    user_id = forms.CharField(label='User ID', max_length=50)
+    user_password = forms.CharField(label='Password', widget=forms.PasswordInput)

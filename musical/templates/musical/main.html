@@ -31,6 +31,26 @@
             ).join('');
         }
 
+        // Transform function to create HTML list for categories
+        function createCategoryList(data) {
+            return data.data.map(category =>
+                `<li><a href="/categories/${category.id}/musicals">${category.name}</a></li>`
+            ).join('');
+        }
+
+        // Transform function to create HTML list for notices
+        function createNoticeLIst(data) {
+            return data.data.map(notice =>
+                `<li><a href="/notices/${notice.id}/">${notice.title}</a></li>`
+            ).join('');
+        }
+
+        // Fetch data for categories
+        fetchDataAndInsert('/categories/', 'category-list', createCategoryList);
+
+        // Fetch data for notices
+        fetchDataAndInsert('/notices/', 'notice-list', createNoticeLIst);
+
         // Fetch data for popular musicals
         fetchDataAndInsert('/musicals/popular/', 'popular-musicals-data', createMusicalLinks);
 
@@ -42,6 +62,13 @@
     </script>
 </head>
 <body>
+
+    <h1>Categories</h1>
+    <ul id="category-list">Loading...</ul>
+
+    <h1>Notices</h1>
+    <ul id="notice-list">Loading...</ul>
+
     <h1>Popular Musicals</h1>
     <ul id="popular-musicals-data">Loading...</ul>
 

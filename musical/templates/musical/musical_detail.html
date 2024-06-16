@@ -7,6 +7,16 @@
 </head>
 <body>
     <h1>{{ musical.title }}</h1>
+    <h5>{{musical.ticket_attribute}}</h5>
+    <h5>{{musical.prf_attribute}}</h5>
+    <h5>{{musical.created_at}}</h5>
+    <h5>{{musical.open_from}}</h5>
+    <h5>{{musical.open_to}}</h5>
+    <h5>{{musical.theater}}</h5>
+    <h5>{{musical.poster}}</h5>
+    <h5>{{musical.source}}</h5>
+    <h5>{{musical.cast}}</h5>
+    <h5>{{musical.price}}</h5>
 
     <h2>Series and Reservations</h2>
     {% for item in series_with_reservations %}
@@ -25,5 +35,14 @@
             {% endfor %}
         </ul>
     {% endfor %}
+
+    {% if notification_exists %}
+        <p>You already have a notification for this musical.</p>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Add Notification</button>
+        </form>
+    {% endif %}
 </body>
 </html>
