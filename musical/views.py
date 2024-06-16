@@ -127,7 +127,9 @@ class DemoMusicalDetailView(View):
         series_with_reservations = []
         for series in musical_series:
             series_id = series['id']
+            print(series_id)
             reservations = MusicalReservationLink.objects.filter(series_id=series_id).values()
+            print(list(reservations))
             series_with_reservations.append({
                 'series': series,
                 'reservations': list(reservations)
@@ -173,4 +175,13 @@ class DemoMyPageView(View):
     def get(self, request, *args, **kwargs):
         if 'user_id' not in request.session:
             return redirect('login')
-        return render(request, 'musical/mypage.html')
+        userinfo = Users.objects.get(id=request.session['user_id'])
+        notifications = TicketNotification.objects.filter(user_id=userinfo.id).values()
+        notification_musicals = []
+        for i in notifications:
+            notification_musicals.append({'id': i['id'], 'title': Musicals.objects.get(id=i['id']).title})
+        context = {
+            'userinfo': userinfo,
+            'notifications': notification_musicals,
+        }
+        return render(request, 'musical/mypage.html', context)

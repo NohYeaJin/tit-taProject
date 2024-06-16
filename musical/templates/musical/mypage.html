@@ -5,6 +5,19 @@
     <title>Title</title>
 </head>
 <body>
+<h1>User Info</h1>
+<h5>{{userinfo.user_id}}</h5>
+<h5>{{userinfo.user_email}}</h5>
+<h5>{{userinfo.user_phone}}</h5>
+<h5>{{userinfo.user_address}}</h5>
+<h5>{{userinfo.user_nickname}}</h5>
+<br>
+<h1>Notifications</h1>
+<h5>
+    {% for notification in notifications %}
+        <li><a href="{% url 'musical_detail' notification.id %}">{{notification.title}}</li>
+    {% endfor %}
+</h5>
 <a href="{% url 'logout' %}">Logout</a>
 </body>
 </html>
