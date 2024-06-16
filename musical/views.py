@@ -7,7 +7,7 @@ from musical.models import Musicals, Categories, Genres, MainImages, MusicalSeri
     Notice, TicketNotification
 from .forms import SignupForm
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout as auth_logout
 from .forms import LoginForm
 class MusicalListView(View):
     def get(self, request, *args, **kwargs):
@@ -106,6 +106,12 @@ def user_login(request):
     return render(request, 'musical/login.html', {'form': form})
 
 
+def logout_view(request):
+    auth_logout(request)  # Django 기본 로그아웃 처리
+    request.session.flush()  # 모든 세션 데이터 제거
+    return redirect('login')
+
+
 class DemoMainPageView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'musical/main.html')
@@ -142,7 +148,7 @@ class DemoMusicalDetailView(View):
             return redirect('login')  # 로그인 페이지로 리디렉션
 
         user_id = request.session['user_id']
-        user = Users.objects.get(user_id=user_id)
+        user = Users.objects.get(id=user_id)
         musical = Musicals.objects.get(id=musical_id)
 
         # 알림 존재 여부 확인
