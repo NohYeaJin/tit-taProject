@@ -132,8 +132,10 @@ class DemoMusicalDetailView(View):
                 'series': series,
                 'reservations': list(reservations)
             })
-
-        notification_exists = TicketNotification.objects.filter(musical_id=musical, user_id=int(request.session['user_id'])).exists()
+        if 'user_id' not in request.session:
+            notification_exists = False
+        else:
+            notification_exists = TicketNotification.objects.filter(musical_id=musical, user_id=int(request.session['user_id'])).exists()
 
         context = {
             'musical': musical,
