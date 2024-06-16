@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <script>
+        // Function to fetch data from a given URL and insert it into the HTML
+        async function fetchDataAndInsert(url, elementId, transformFunction) {
+            try {
+                let response = await fetch(url);
+                if (!response.ok) throw new Error('Network response was not ok');
+                let data = await response.json();
+                document.getElementById(elementId).innerHTML = transformFunction(data);
+            } catch (error) {
+                console.error('Failed to fetch data:', error);
+            }
+        }
+
+        // Transform function to create HTML links for musicals
+        function createMusicalLinks(data) {
+            return data.data.map(musical =>
+                `<li><a href="/musicals/detail/${musical.id}/">${musical.title}</a></li>`
+            ).join('');
+        }
+
+        // Transform function to create HTML list for main images
+        function createImageList(data) {
+            return data.data.map(image =>
+                `<li><img src="${image.image_url}" alt="Image ${image.sequence}"></li>`
+            ).join('');
+        }
+
+        // Fetch data for popular musicals
+        fetchDataAndInsert('/musicals/popular/', 'popular-musicals-data', createMusicalLinks);
+
+        // Fetch data for upcoming musicals
+        fetchDataAndInsert('/musicals/upcoming/', 'upcoming-musicals-data', createMusicalLinks);
+
+        // Fetch data for main images
+        fetchDataAndInsert('/main/images/', 'main-images-data', createImageList);
+    </script>
+</head>
+<body>
+    <h1>Popular Musicals</h1>
+    <ul id="popular-musicals-data">Loading...</ul>
+
+    <h1>Upcoming Musicals</h1>
+    <ul id="upcoming-musicals-data">Loading...</ul>
+
+    <h1>Main Images</h1>
+    <ul id="main-images-data">Loading...</ul>
+</body>
+</html>

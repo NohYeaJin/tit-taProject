@@ -37,6 +37,9 @@ class PushNotification(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     push_at = models.DateTimeField(blank=True, null=True)
 
+    def __str__(self):
+        return self.title
+
 class MusicalSeries(models.Model):
     series_name = models.CharField(max_length=50)
     series_description = models.TextField()

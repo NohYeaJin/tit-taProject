@@ -18,16 +18,22 @@ from django.contrib import admin
 from django.urls import path
 
 from musical.views import MusicalListView, PopularMusicalListView, UpcomingMusicalListView, CategoryListView, \
-    GenreListView, MainImageListView, MusicalDetailView
+    GenreListView, MainImageListView, MusicalDetailView, signup, user_login, DemoMainPageView, DemoMusicalDetailView, \
+    CategoryMusicalListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('musicals/popular/', PopularMusicalListView.as_view(), name="popular-musical-list"),
     path('musicals/upcoming/', UpcomingMusicalListView.as_view(), name="upcoming-musical-list"),
     path('categories/', CategoryListView.as_view(), name="category-list"),
+    path('categories/<int:category_id>/musicals/', CategoryMusicalListView.as_view(), name='category-musical-list'),
     path('genres/', GenreListView.as_view(), name="genre-list"),
     path('main/images/', MainImageListView.as_view(), name="main-image-list"),
     path('musicals/<int:musical_id>/', MusicalDetailView.as_view(), name='musical_detail'),
+    path('musicals/detail/<int:musical_id>/', DemoMusicalDetailView.as_view(), name='musical_detail'),
+    path('signup/', signup, name='signup'),
+    path('login/', user_login, name='login'),
+    path('', DemoMainPageView.as_view(), name='main-page'),
 
 
 ]

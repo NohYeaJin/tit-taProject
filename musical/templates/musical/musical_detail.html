@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ musical.title }} Details</title>
+</head>
+<body>
+    <h1>{{ musical.title }}</h1>
+
+    <h2>Series and Reservations</h2>
+    {% for item in series_with_reservations %}
+        <h3>Series: {{ item.series.name }}</h3>
+        <p>Date: {{ item.series.date }}</p>
+        <p>Location: {{ item.series.location }}</p>
+
+        <h4>Reservations</h4>
+        <ul>
+            {% for reservation in item.reservations %}
+                <li>
+                    Reservation Link: <a href="{{ reservation.link }}">{{ reservation.link }}</a>
+                    <br>
+                    Reservation Date: {{ reservation.date }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</body>
+</html>
