@@ -20,17 +20,14 @@
 
     <h2>Series and Reservations</h2>
     {% for item in series_with_reservations %}
-        <h3>Series: {{ item.series.name }}</h3>
-        <p>Date: {{ item.series.date }}</p>
-        <p>Location: {{ item.series.location }}</p>
-
+        <h3>Series: {{ item.series.series_name }}</h3>
+        <p>DateTime: {{ item.series.ticket_time }}</p>
+        <p>source: {{ item.series.reservation_source }}</p>
         <h4>Reservations</h4>
         <ul>
             {% for reservation in item.reservations %}
                 <li>
-                    Reservation Link: <a href="{{ reservation.link }}">{{ reservation.link }}</a>
-                    <br>
-                    Reservation Date: {{ reservation.date }}
+                    Reservation Link: <a href="{{ reservation.link }}">{{ reservation.name }}</a>
                 </li>
             {% endfor %}
         </ul>
